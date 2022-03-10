@@ -89,4 +89,15 @@ footer {
   color: green; 
 }
 
+.url {
+  text-align: center;
+  font-size: 150%;
+}
+.url input {
+  font-size: 110%;
+  border: #bb880080 solid 5px;
+  border-radius: 10px;
+  margin-top: 1ex;
+}
+
 /*# sourceMappingURL=styles.css.map */

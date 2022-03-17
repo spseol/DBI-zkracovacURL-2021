@@ -45,6 +45,9 @@ def index():
 def index_post():
     url = request.form.get("url")
     if url:
+        url = url.strip()
+        if url.find("http://") != 0 or url.find("https://") != 0:
+            url = "http://" + url
         # vytvořím zkratku, která ještě neexistuje
         shorcut = "".join([random.choice(string.ascii_letters) for i in range(7)])
         address = Addresses.get(
@@ -70,8 +73,13 @@ def index_post():
 @app.route("/remove", methods=["POST"])
 @db_session
 def remove_post():
-    addr = Addresses[request.form.get("rmid")]
-    addr.delete()
+    if "nick" in session:
+        rmid = request.form.get("rmid")
+        user = User.get(nick=session["nick"])
+        # user = User.get(nick="karel")
+        addr = Addresses.get(id=rmid, user=user)
+        if addr:
+            addr.delete()
     return redirect(url_for("index"))
 
 

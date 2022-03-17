@@ -46,7 +46,7 @@ def index_post():
     url = request.form.get("url")
     if url:
         url = url.strip()
-        if url.find("http://") != 0 or url.find("https://") != 0:
+        if url.find("http://") != 0 and url.find("https://") != 0:
             url = "http://" + url
         # vytvořím zkratku, která ještě neexistuje
         shorcut = "".join([random.choice(string.ascii_letters) for i in range(7)])
